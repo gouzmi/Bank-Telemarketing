@@ -1,2 +1,4 @@
 __pycache__/problem.cpython-36.pyc
-.ipynb_checkpoints/Data_Camp-checkpoint.ipynb
+.ipynb_checkpoints/*
+.vscode/settings.json
+.gitignore
