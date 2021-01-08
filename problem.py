@@ -4,7 +4,8 @@ import pandas as pd
 import rampwf as rw
 from rampwf.workflows import FeatureExtractorClassifier
 from rampwf.score_types.base import BaseScoreType
-from sklearn.model_selection import KFold
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.metrics import balanced_accuracy_score
 
 problem_title = "Step Detection with Inertial Measurement Units"
 _target_column_name = 'y'
@@ -16,36 +17,26 @@ Predictions = rw.prediction_types.make_multiclass(
 workflow = rw.workflows.FeatureExtractorClassifier()
 
 score_types = [
-    rw.score_types.F1Above(name='F-score (loan acceptance)', precision=4),
+    rw.score_types.MacroAveragedRecall(name='Balanced Accuracy', precision=4),
 ]
-# class Bank(FeatureExtractorClassifier):
-#     def __init__(self, workflow_element_names=[
-#             'feature_extractor', 'classifier', 'train.csv']):
-#         super(Bank, self).__init__(workflow_element_names[:2])
-#         self.element_names = workflow_element_names
 
-# define the score (specific score for the FAN problem)
 
-# class FScoreBank(BaseScoreType):
-#     is_lower_the_better = False
-#     minimum = 0.0
-#     maximum = 1.0
+class FScoreBank(BaseScoreType):
+    is_lower_the_better = False
+    minimum = 0.0
+    maximum = 1.0
 
-#     def __init__(self, name='bank error', precision=2):
-#         self.name = name
-#         self.precision = precision
+    def __init__(self, name='balanced_accuracy', precision=2):
+        self.name = name
+        self.precision = precision
 
-#     def __call__(self, y_true, y_pred):
-#         if isinstance(y_true, pd.Series):
-#             y_true = y_true.values
-#         scores = [y_true[i] == y_pred[i] for i in range(len(y_true))]
-#         loss = scores.count(False)/len(y_true)*100
-
-#         return loss
+    def __call__(self, y_true, y_pred):
+        score = balanced_accuracy_score(y_true, y_pred)
+        return score
 
 
 def get_cv(X, y):
-    cv = KFold(n_splits=8, random_state=42)
+    cv = StratifiedShuffleSplit(n_splits = 8, test_size = 0.2)
     return cv.split(X, y)
 
 
