@@ -1,0 +1,8 @@
+__pycache__/problem.cpython-36.pyc
+.ipynb_checkpoints/*
+.vscode/settings.json
+.gitignore
+submissions/dummy/__pycache__/classifier.cpython-36.pyc
+submissions/dummy/__pycache__/feature_extractor.cpython-36.pyc
+submissions/starting_kit/__pycache__/feature_extractor.cpython-36.pyc
+submissions/starting_kit/__pycache__/classifier.cpython-36.pyc
