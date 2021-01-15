@@ -1,6 +1,6 @@
 # Student challenge
 
-Original authors: Ophelie Bleu, Ines Ben-Rached, Guillaume Dupont, Manal Zidani, Mathieu Lormeau
+Original authors: Ophélie Bleu, Ines Ben-Rached, Guillaume Dupont, Manal Zidani, Matthieu Lormeau
 
 As part of the Data Camp course, we had to build  a data challenge addressing some social/science/business
 problem using data obtained from external sources. 
